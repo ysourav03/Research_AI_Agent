@@ -1,7 +1,5 @@
 ## Agentic AI: A Beginner's Tutorial
 
-Imagine you have a highly skilled, motivated intern. You give them a goal, and they figure out the steps, use the right resources, and adapt when things go wrong—that's the essence of an AI agent.
-
 ### 1. What is Agentic AI? 
 
 **Agentic AI** refers to an artificial intelligence system that has **agency**. Think of it as an AI that doesn't just answer a single question (like ChatGPT), but actually **takes action** in the world to achieve a specific, complex objective.
