@@ -1,0 +1,41 @@
+## Functional Interview Questions & Answers
+
+### 1. The Core Functional Difference
+**Q:** Why did you use an **Agent** pattern instead of a simple **LLM Chain** for this research project?
+**A:** A Chain follows a fixed set of steps, but an **Agent** can dynamically **reason and choose tools** based on the query. For research, the Agent's ability to self-correct and decide *when* and *how* to search is crucial for accuracy.
+
+### 2. The Role of ReAct
+**Q:** Explain the **ReAct** (Reasoning and Acting) paradigm and how it benefits your agent.
+**A:** ReAct forces the model to interleave **Thought** (internal planning) with **Action** (calling a tool like Tavily). This process makes the agent's steps **transparent and verifiable**, dramatically reducing the chance of irrelevant or hallucinated results.
+
+### 3. Tool Selection Strategy
+**Q:** Why did you choose **Tavily Search** as the primary tool, and how is it better than just using a general web search?
+**A:** Tavily is specifically an **AI-focused search API** optimized for LLM agents. It returns highly relevant, concise results that are better suited for grounding the LLM, whereas a general web search might return too much noisy data.
+
+### 4. Handling Real-Time Data
+**Q:** How does your agent ensure the information it provides is **current** and not limited by the model’s training cutoff date?
+**A:** The agent is designed to **always use its Tavily Search tool** for factual queries. By leveraging this external, real-time tool, the agent bypasses the Gemini model's knowledge cutoff to provide up-to-date information.
+
+### 5. Managing LLM Behavior
+**Q:** You set the LLM's **temperature** to a low value (0.2). What is the functional reason for this?
+**A:** Temperature controls randomness. Setting it to a **low value** makes the Gemini model's responses more **deterministic, factual, and less creative**. This is necessary for a research agent where accuracy and consistency are paramount.
+
+### 6. Code vs. Orchestration
+**Q:** What part of the agent's logic is handled by **LangChain**, versus what is done by the **Gemini model** itself?
+**A:** **LangChain** handles the **orchestration**: connecting the model, loading the tools, and managing the ReAct loop. The **Gemini model** is the **core intelligence**, performing the reasoning, parsing the search results, and synthesizing the final answer.
+
+### 7. User Interface Necessity
+**Q:** Why did you use **Streamlit** for the frontend instead of just running the script in a terminal?
+**A:** Streamlit allowed me to quickly build an **interactive, chat-style GUI** with a clean history. This significantly improves the user experience and makes the agent **accessible** to non-technical users.
+
+### 8. Output Quality Control
+**Q:** The final output is often a structured report. What dictates the **format** of the final research output?
+**A:** The **system prompt** given to the agent is responsible for guiding the output. It explicitly instructs the model to synthesize the facts and format the final answer clearly using **Markdown** headings and bullet points.
+
+### 9. Preventing Infinite Loops
+**Q:** Agents can sometimes get stuck in loops. What mechanisms do you have to ensure the agent reaches a conclusion?
+**A:** I set parameters on the `AgentExecutor` like `max_iterations`. This **limits the number of Thought/Action cycles** the agent can execute, ensuring it stops and attempts to generate a final answer, even if the task is too complex.
+
+### 10. Security and Deployment
+**Q:** How did you handle sensitive information, like API keys, during development?
+**A:** I used the **`python-dotenv`** library to load API keys from a local `.env` file. This **separates the secrets from the code**, which is a critical security practice for sharing projects publicly on platforms like GitHub.

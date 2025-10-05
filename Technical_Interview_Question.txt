@@ -1,0 +1,41 @@
+## Technical Interview Questions
+
+### 1. Agent Design Pattern Choice
+**Q:** Why did you specifically choose the **`create_react_agent`** function over a built-in agent type like `OpenAIFunctionsAgent`?
+**A:** I opted for the **ReAct implementation** because it explicitly enforces the **Thought-Action-Observation** loop. This gives us **maximum transparency** and control over the intermediate steps, which is critical for debugging complex reasoning paths and ensuring the model grounds itself before concluding.
+
+### 2. Prompt Engineering for Tool Use
+**Q:** What specific strategies did you use in the agent's **system prompt** to ensure reliable tool (Tavily) usage and output parsing?
+**A:** The prompt includes a clear **few-shot example** demonstrating the exact ReAct format and correct function calling syntax. I also provided a detailed instruction in the system message on **when to call the tool** (for external facts) versus **when to rely on internal knowledge** (for general synthesis).
+
+### 3. LLM Selection Justification
+**Q:** You used **Gemini 2.5 Flash**. As a senior engineer, what was the primary architectural trade-off you considered when selecting this model?
+**A:** The primary trade-off was **speed/cost vs. maximum reasoning depth**. Flash offers superior speed and a large context window at a low cost, which is ideal for a fast-paced, grounded search agent where the **external tool** compensates for any slight reduction in base reasoning power compared to a larger model.
+
+### 4. Handling API Failures
+**Q:** What robust **error handling or retry logic** did you implement for the external Tavily API calls within the LangChain executor?
+**A:** I relied on the default **retry mechanisms** baked into the `AgentExecutor`, which typically includes backoff for transient errors. For a production system, I would implement a custom **exponential backoff and circuit breaker pattern** around the tool invocation to manage external service stability.
+
+### 5. Dependency Management and Security
+**Q:** Beyond just loading environment variables with `dotenv`, how did you structure the project to manage secrets and dependencies for potential deployment?
+**A:** The project uses a standard **`requirements.txt`** for deterministic dependency installation. For secrets, the **`.env`** approach keeps credentials out of the codebase, which is the foundational step before migrating to a secure secret manager like **Vault** or a cloud KMS service in a true production environment.
+
+### 6. Optimizing Latency
+**Q:** Given the agent is calling an external search API, how did you try to **minimize overall latency** (response time)?
+**A:** I configured the Tavily tool to return only the **top 3 most relevant results** (`max_results=3`). This minimizes the amount of context the LLM has to read and process in the observation step, which directly reduces both API processing time and overall token usage.
+
+### 7. Agent State Management in Streamlit
+**Q:** Since Streamlit is stateless, how did you maintain the **conversation history** across multiple user turns for the agent?
+**A:** I leveraged **Streamlit's `st.session_state`**. I stored the entire chat history (messages) in this dictionary, and more importantly, I would integrate a **LangChain Memory object** (like `ConversationBufferMemory`) initialized from this session state to feed the context back into the agent's prompt on every new turn.
+
+### 8. The Role of `AgentExecutor`
+**Q:** What is the functional difference between the **Agent** you created with `create_react_agent` and the final **`AgentExecutor`**?
+**A:** The **Agent** is the **logic definition**—it defines *how* the model thinks, acts, and parses. The **AgentExecutor** is the **runtime engine**—it actually runs the loop, manages the tools, handles the parsing, and applies the termination conditions (`max_iterations`).
+
+### 9. Controlling Hallucination
+**Q:** Besides the low temperature, what is the single most effective technical component in your architecture for mitigating **hallucination**?
+**A:** The most effective component is the **mandatory structure** imposed by the ReAct prompt and the use of the **Tavily tool**. By requiring the agent to cite an **"Observation"** from a real-time external source, we force the output to be **grounded** in verified data, rather than relying solely on the model's internal knowledge.
+
+### 10. Future Scalability (Concurrency)
+**Q:** If this application saw high traffic, what is the primary architectural change you would need to implement to handle **concurrent user requests** effectively?
+**A:** I would need to manage **session isolation** carefully, potentially by migrating the Streamlit app into a containerized service (Docker/Kubernetes) and ensuring that **each user's `AgentExecutor` and `session_state` are completely isolated and thread-safe** to prevent cross-talk between conversations.
