@@ -2,7 +2,9 @@
 
 ### 1. What is Agentic AI? 
 
-**Agentic AI** refers to an artificial intelligence system that has **agency**. Think of it as an AI that doesn't just answer a single question (like ChatGPT), but actually **takes action** in the world to achieve a specific, complex objective. AI Agent is a program that take input, thinks and acts to complete a task using tools, memory and knowledge.
+Agentic AI, at its core, refers to AI systems that can think, plan, and take actions autonomously to achieve a specific goal. They are designed not just to answer a question, but to solve a problem or complete a task from start to finish.
+
+In simple words, if traditional AI models like ChatGPT are brilliant oracles that can instantly provide information or generate text based on a single prompt, Agentic AI is a digital employee you give a goal to, and it figures out the necessary steps, executes them, and keeps working until the goal is met.
 
 | Traditional AI (Example: Simple Calculator) | Generative AI (Example: ChatGPT) | Agentic AI (Example: Research Agent) |
 | :--- | :--- | :--- |
