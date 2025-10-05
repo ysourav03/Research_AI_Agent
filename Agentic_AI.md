@@ -1,14 +1,8 @@
-I see you're looking to dive into the world of agentic AI. It's one of the most exciting shifts happening right now, transforming how we build AI systems from simple tools into autonomous workers.
-
-As someone with experience building these systems, I'll explain it without the jargon, treating you as a talented newcomer.
-
-***
-
-## 💡 Agentic AI: A Beginner's Tutorial
+## Agentic AI: A Beginner's Tutorial
 
 Imagine you have a highly skilled, motivated intern. You give them a goal, and they figure out the steps, use the right resources, and adapt when things go wrong—that's the essence of an AI agent.
 
-### 1. What is Agentic AI? 🤖
+### 1. What is Agentic AI? 
 
 **Agentic AI** refers to an artificial intelligence system that has **agency**. Think of it as an AI that doesn't just answer a single question (like ChatGPT), but actually **takes action** in the world to achieve a specific, complex objective.
 
@@ -22,7 +16,7 @@ The key concept is that the AI has a persistent **goal**, can **plan** the path 
 
 ***
 
-### 2. How Agentic AI Works (The Loop) 🔄
+### 2. How Agentic AI Works (The Loop) 
 
 The way an AI agent works is by constantly running a continuous cycle, often called the **"Plan, Act, Reflect" loop**. It's how the agent figures out its next step and ensures it stays on track.
 
@@ -40,7 +34,7 @@ This loop repeats, sometimes dozens of times, until the agent determines the ori
 
 ***
 
-### 3. Architecture of an AI Agent 🏗️
+### 3. Architecture of an AI Agent 
 
 The agent's architecture is a framework designed to support this continuous planning loop. It requires three critical components working together around the central LLM:
 
