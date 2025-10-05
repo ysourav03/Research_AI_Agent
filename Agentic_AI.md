@@ -2,7 +2,7 @@
 
 ### 1. What is Agentic AI? 
 
-**Agentic AI** refers to an artificial intelligence system that has **agency**. Think of it as an AI that doesn't just answer a single question (like ChatGPT), but actually **takes action** in the world to achieve a specific, complex objective.
+**Agentic AI** refers to an artificial intelligence system that has **agency**. Think of it as an AI that doesn't just answer a single question (like ChatGPT), but actually **takes action** in the world to achieve a specific, complex objective. AI Agent is a program that take input, thinks and acts to complete a task using tools, memory and knowledge.
 
 | Traditional AI (Example: Simple Calculator) | Generative AI (Example: ChatGPT) | Agentic AI (Example: Research Agent) |
 | :--- | :--- | :--- |
