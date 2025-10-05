@@ -2,7 +2,7 @@
 -------------------
 # Expert Research Agent Documentation
 
-## 1. Project Overview and Architecture
+## 1\. Project Overview and Architecture
 
 The **Expert Research Agent** is an autonomous AI application designed to answer complex user questions by performing real-time web searches. It utilizes the **LangChain framework** to orchestrate a **Large Language Model (LLM)** with a specialized web-search tool, following the **ReAct (Reasoning and Acting)** paradigm for reliable and verifiable results. The agent is exposed to the user via an interactive **Streamlit** web application.
 
@@ -12,8 +12,8 @@ The **Expert Research Agent** is an autonomous AI application designed to answer
   * **Structured Reasoning:** Employs the ReAct pattern to reason, plan, execute tools, and observe results before generating a final answer.
   * **Contextual Output:** Delivers detailed, well-structured answers in **Markdown** format, complete with sources.
   * **Secure Deployment:** Utilizes a `.env` file and `.gitignore` to protect sensitive API keys.
-----------------------------------------
-## 2. Technical Stack and Core Libraries
+-----------------------------------------
+## 2\. Technical Stack and Core Libraries
 
 The agent is built on a modern Python stack. Understanding these libraries is crucial for discussing the project in a technical interview.
 
@@ -26,8 +26,8 @@ The agent is built on a modern Python stack. Understanding these libraries is cr
 | **`AgentExecutor`** | The runtime environment that takes the agent and tools and executes the full chain of steps (tool calls, parsing, observation loops) until a final answer is generated. | "The `AgentExecutor` is the **engine that runs the agent loop**. I configured it with `verbose=True` for debugging, and crucial parameters like `max_iterations=30` and `early_stopping_method='generate'` to control its behavior and prevent infinite loops." |
 | **Streamlit** | An open-source Python framework that allows developers to quickly build interactive web applications for data science and machine learning projects. | "I used Streamlit to build the **user-facing front-end** (`app.py`). It provides a simple, modern chat interface for users to interact with the agent without needing to touch the code, significantly improving the user experience." |
 | **`python-dotenv`** | A library to load environment variables from a `.env` file into `os.environ`. | "This is essential for **security**. It allows me to separate sensitive credentials (like API keys) from the source code, which is critical for maintaining best practices in a production or open-source environment." |
------------------------------------------
-## 3. Code Breakdown: `research_agent_main.py`
+----------------------------------------------
+## 3\. Code Breakdown: `research_agent_main.py`
 
 This file sets up the complete, runnable research agent.
 
@@ -68,7 +68,7 @@ This file sets up the complete, runnable research agent.
     The `create_react_agent` function binds the components, and the `AgentExecutor` manages the entire conversational/tool-calling life cycle.
 
 ---------------------------------------------------
-## 4. Code Breakdown: `app.py` (Streamlit Frontend)
+## 4\. Code Breakdown: `app.py` (Streamlit Frontend)
 
 This file provides the user interface for the research agent.
 
@@ -123,3 +123,52 @@ This file provides the user interface for the research agent.
     streamlit run app.py
     ```
 2.  Open the local URL displayed in the terminal (e.g., `http://localhost:8501`) in your web browser.
+
+-----------------------------------------------------------
+
+## 6\. Deployment: Publishing via Streamlit Community Cloud 
+
+The Expert Research Agent is publicly accessible and instantly updated via **Streamlit Community Cloud**, leveraging its seamless integration with GitHub.
+
+### 6.1 Prerequisites
+
+Before deployment, the project repository must be fully prepared:
+
+1.  **Repository State:** All application code (`expert_research_agent.py`) must be pushed to a **public GitHub repository**.
+2.  **Dependencies:** A `requirements.txt` file must be present in the root directory, listing all necessary packages (e.g., `streamlit`, `langchain`, `google-genai`, `tavily-python`).
+3.  **Local Secrets Secured:** Ensure your local `.env` file containing API keys is ignored by Git (`.gitignore`).
+
+### 6.2 Step-by-Step Deployment Path
+
+The following steps secure the necessary API keys and launch the application:
+
+1.  **Access Streamlit Cloud:** Navigate to the Streamlit Community Cloud dashboard and log in using your GitHub account.
+
+2.  **Create New App:** Click **"New app"** to initiate the deployment wizard.
+
+3.  **Configure Source:** Select the following options corresponding to your project:
+
+      * **Repository:** `your-username/your-agent-repo`
+      * **Branch:** `main` (or the branch containing the latest code)
+      * **Main file path:** `expert_research_agent.py` (or your app's filename)
+
+4.  **Secure Secret Injection (Critical):**
+
+      * Click **"Advanced settings."**
+      * In the **"Secrets"** section, paste your environment variables in the TOML format. These are accessed securely via `st.secrets` within the application.
+
+    <!-- end list -->
+
+    ```toml
+    [secrets]
+    GEMINI_API_KEY = "your_actual_gemini_key"
+    TAVILY_API_KEY = "your_actual_tavily_key"
+    ```
+
+5.  **Finalize & Launch:** Click **"Deploy."** Streamlit Cloud will handle environment creation, dependency installation, and server provisioning.
+
+### 6.3 Public Access
+
+Upon successful deployment, the application is assigned a **permanent, public URL** (e.g., `https://[app-name-hash].streamlit.app`).
+
+**Note on CI/CD:** Any subsequent push to the configured GitHub branch will trigger an **automatic redeployment** on Streamlit Community Cloud, ensuring the live agent is always running the latest version of the code.
