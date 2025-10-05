@@ -2,24 +2,18 @@ import streamlit as st
 import os
 import time
 
-# Assuming your agent code is saved as 'research_agent.py' in the same directory.
+
 # We will import the function that runs the agent.
-# NOTE: To run this successfully, ensure you have a .env file with
-# GOOGLE_API_KEY and TAVILY_API_KEY in the same directory as both files.
+# NOTE: To run this successfully, ensure you have a .env file with GOOGLE_API_KEY and TAVILY_API_KEY in the same directory as both files.
 try:
     # Attempt to import the function from your agent file
-    # You MUST change the agent file to ONLY define the function and
-    # remove the 'if __name__ == "__main__":' block, or modify this import.
+    # You MUST change the agent file to ONLY define the function and remove the 'if __name__ == "__main__":' block, or modify this import.
     # The safest way is to wrap the agent function and the full setup.
     
     # --- Modifying Agent Logic for Safe Import ---
-    # For a Streamlit app, we should encapsulate the agent setup and running
-    # in a function that *returns* the final answer.
-    # The original file's `run_research_agent` currently prints, not returns,
-    # and re-initializes everything on every run.
-    #
-    # To make it robust, let's assume we can import the core executor and a
-    # new simplified runner function.
+    # For a Streamlit app, we should encapsulate the agent setup and running in a function that *returns* the final answer.
+    # The original file's `run_research_agent` currently prints, not returns, and re-initializes everything on every run.
+    # To make it robust, let's assume we can import the core executor and a new simplified runner function.
     from research_agent_main import agent_executor 
     
     # A simple runner function for Streamlit, designed to work with the imported executor
@@ -100,4 +94,4 @@ if prompt := st.chat_input("Ask your research question here..."):
 
 
 st.sidebar.markdown("---")
-st.sidebar.info("Developed by a 5+ YOE Agentic AI Professional.")
+# st.sidebar.info("Developed by a 5+ YOE Agentic AI Professional.")
