@@ -20,13 +20,15 @@ The key concept is that the AI has a persistent **goal**, can **plan** the path 
 
 The main idea behind Agentic AI is that it operates in a continuous, iterative loop, much like a person solving a complex task. I like to think of this as the **P.A.L.T. Loop**: **Plan, Act, Learn, Terminate**.
 
-1.  **Thinking/Planning (The Brain):** The agent takes a high-level goal (e.g., "Find the best flight and hotel package for a trip to Tokyo next month") and **breaks it down** into a series of smaller, manageable steps (e.g., 1. Research flight prices. 2. Research hotel availability. 3. Compare prices. 4. Draft itinerary). This step is about **reasoning** and **self-correction**.
+1. **Perception & Goal:** The agent takes a high-level goal (e.g., "Find the best flight and hotel package for a trip to Tokyo next month"). The first step is Perception—it ingests the initial command and any relevant context from its memory.
 
-2.  **Acting (The Hands):** The agent executes the first step of its plan by using its available **tools**. For the travel example, it might use a web-browsing tool to search flight aggregator sites or an API tool to check hotel booking platforms.
+2.  **Thinking/Planning (The Brain):** This is where the Large Language Model (LLM)—the brain of the agent—is used to "think" and **breaks it down** (goal) into a series of smaller, manageable steps (e.g., 1. Research flight prices. 2. Research hotel availability. 3. Compare prices. 4. Draft itinerary). This step is about **reasoning** and **self-correction**.
 
-3.  **Learning/Reflecting (The Feedback):** After an action, the agent observes the result. Did the flight search fail? Was the hotel too expensive? It uses this **feedback** to decide if the action was successful. If not, it **revises its original plan**—it doesn't just give up. This iterative loop is what allows it to handle ambiguity and complexity.
+3.  **Acting (The Hands):** The agent executes the first step of its plan by using its available **tools**. For the travel example, it might use a web-browsing tool to search flight aggregator sites or an API tool to check hotel booking platforms.
 
-4.  **Terminating (The Goal Achieved):** The process continues until the original, high-level goal is successfully achieved, and the agent presents the final result (the suggested itinerary).
+4.  **Learning/Reflecting (The Feedback):** After an action, the agent observes the result. Did the flight search fail? Was the hotel too expensive? It uses this **feedback** to decide if the action was successful. If not, it **revises its original plan**—it doesn't just give up. This iterative loop is what allows it to handle ambiguity and complexity.
+
+5.  **Terminating (The Goal Achieved):** The process continues until the original, high-level goal is successfully achieved, and the agent presents the final result (the suggested itinerary).
 
 **Analogy:** Imagine the agent is your **personal research assistant**. You give them the vague task: "Figure out what the stock market did last week and why." They don't just type an answer. They:
 1. **Plan:** "First, I'll search for the S&P 500 performance. Second, I'll look for major economic news from that week. Third, I'll synthesize the data."
